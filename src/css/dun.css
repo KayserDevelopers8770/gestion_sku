@@ -1,0 +1,196 @@
+html, body {
+  height: 100%;
+  width:  100%;
+  margin: 0px;
+}
+#div_dun {
+  display: flex;
+  background-color: rgba(0, 0, 255, 0.24);
+  height: 100%;
+  padding: 1rem;
+}
+#div_dun_list {
+  display: flex;
+  flex-direction: column;
+  flex: 75%;
+}
+
+#div_dun_list_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex : 0 1 8%;
+  background-color: white;
+  margin-bottom: 1rem;
+  padding: .5rem 1.5rem;
+  /* margin: 2rem; */
+}
+.header_filter {
+  flex: 0 0 35%;
+  display: flex;
+  background-color: rgba(0, 0, 255, 0.247);
+  padding: .5rem;
+}
+.header_filter>input {
+  flex: 0 0 70%;
+}
+
+#div_dun_list_dtable {
+  
+  display: flex;
+  flex-direction: column;
+  /* width: 95%; */
+  border: 2px solid white;
+  flex: 1 1 auto;
+  /* margin: 2rem; */
+  background-color: rgba(252, 252, 252, 0.623);
+  
+}
+
+#div_dun_list_dtable>.dhead {
+  flex: 0 0 5%;
+  display: flex;
+  justify-content: flex-start;
+  overflow-y: scroll;
+}
+#div_dun_list_dtable>.dhead>div {
+  text-align: center;
+  color: white;
+  background-color: #5F88FF;
+  /* flex: 1 1 auto; */
+  border: 1px solid white;
+}
+#div_dun_list_dtable .dbody {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+#div_dun_list_dtable .dtable_row {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-start;
+}
+.row_checked {
+  background-color: rgba(123, 255, 0, 0.301);
+}
+#div_dun_list_dtable .dtable_row>div {
+    text-align: center;
+    border: 1px solid rgba(130, 128, 238, 0.466);
+}
+.icon_table {
+  height: 1rem;
+}
+
+#div_dun_list_dtable>.dhead>div:nth-child(-n+3), #div_dun_list_dtable .dtable_row>div:nth-child(-n+3) {
+  flex: 0 0 17%;
+}
+#div_dun_list_dtable>.dhead>div:nth-child(n+4), #div_dun_list_dtable .dtable_row>div:nth-child(n+4) {
+  flex: 0 0 7%;
+}
+#div_dun_list_dtable>.dhead>div:nth-child(8), #div_dun_list_dtable .dtable_row>div:nth-child(8) {
+  flex: 0 0 10%;
+}
+#div_dun_list_dtable>.dhead>div:nth-child(9) {
+  flex: 0 0 8%;
+}
+#div_dun_list_dtable .dtable_row>div:nth-child(9) {
+  flex: 0 0 8% !important;
+}
+#div_dun_list_dtable .dtable_row>div:nth-child(1) {
+  flex: 0 0 20%;
+  text-align: left;
+  padding-left: .5rem;
+}
+#div_dun_list_dtable>.dhead>div:nth-child(1) {
+  flex: 0 0 20%;
+}
+
+#div_dun_list_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 81, 255, 0.507);
+  flex: 0 1 10%;
+}
+#div_dun_list_footer>* {
+  margin: 0rem 1rem;
+  border:2px solid white;
+}
+
+/*************  ESTILOS PARA EL DUN GESTION ********/
+
+#div_dun_gestion {
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 25%;
+  background-color: rgba(3, 3, 85, 0.753);
+
+}
+#div_dun_gestion>.header_title {
+  background-color: rgba(240, 255, 255, 0.863);
+  border: 2px solid white;
+  border-radius: .3rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(0, 0, 141);
+}
+
+#div_dun_gestion>.gestion_controls {
+  display: flex;
+  flex-direction: column;
+  margin : 2rem 0rem;
+}
+
+#div_dun_gestion .row_gestion_controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin : .2rem 0rem;
+}
+
+#div_dun_gestion>.gestion_buttons {
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.11);
+}
+#div_dun_gestion>.gestion_buttons>* {
+  margin: 1rem;
+}
+.row_gestion_controls span {
+  flex : 0 1 30%;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  /* background-color: rgba(255, 255, 255, 0.158); */
+  text-align: right;
+  padding-right: .8rem;
+}
+.row_gestion_controls input {
+  flex: 0 1 50%;
+  text-align: center;
+}
+
+/**** modal loading ****/
+.modal_loading_full {
+  padding-top: 10rem;
+  position: absolute !important;
+  height: 100% !important;
+  width: 100% !important;
+  background-color: rgba(255, 255, 255, 0.397) !important;
+  display: flex !important;
+  justify-content: center;
+  z-index: 11 !important;
+}
+
+.modal_loading_full img {
+  margin-top: 3rem;
+  height: 8rem;
+  width: 8rem;
+}
+.cont_hidden {
+  display: none !important;
+}/*************  FIN ESTULO MODAL LOADING    ****************/

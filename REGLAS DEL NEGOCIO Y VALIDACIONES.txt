@@ -1,0 +1,78 @@
+﻿ENTIDADES:
+----------
+LISTA:
+ARTICULO:
+SKUs
+
+PERFILES:
+--------
+EDITOR
+REVISOR
+ADMIN
+
+ESTADO DE LISTA:
+---------------
+EDITADA
+CREADA
+REVISADA
+
+
+ESTADO "EDITADA":
+----------------
+
+
+CUANDO UN EDITOR CREA UN ARTICULO NUEVO, Y LO AGREGA A UNA NUEVA LISTA QUE SE CREAR� CON UN CORRELATIVO DE ID DE LISTA Y CON UN ESTADO LISTA "editanto".
+MIENTRAS EL EDITOR, ESTA EN ESTE ESTADO, PUEDE MODIFICAR DETALLES DEL ARTICULO QUE ESTA AGREGANDO, AGREGAR NUEVAS TALLAS O AGREGAR OTRO ARTICULO PARA ENVIAR MAS DE UNO EN UNA MISMA LISTA.
+
+SI ESTA LISTA NO SE CONCLUYERA ( CORTE DE ENERGIA, ACTUALIZACION DE PANTALLA, CIERRE DE SESION POR TIEMPO DE ESPERA, ETC ), CUANDO EL USUARIO RETOME ESTE MODULO, SE LE AVISAR� QUE HAY LISTA(S) QUE ESTAN EDITANDO Y QUE PODRA DESCARTARLAS (ELIMINARLAS) O CONTINUAR TRABAJANDO.
+
+SE PROGRAMARA UNA TAREA PARA QUE TODAS LAS NOCHES, SE REALICE UNA BUSQUEDA DE TODAS LAS LISTAS CON ESTADO 'editanto' ELIMINANDOLAS, DE MODO QUE NO ES RECOMENDABLE EDITAR SI CONCLUIR EL ENVIO
+
+*** TODO ESTO SE REALIZA DADO QUE TRABAJOMOS CON SAP Y UNA BASE DE DATOS LOCAL, Y TENEMOS QUE EVITAR ERRORES DE SINCRONIZACI�N NI CONSUMIR MUCHOS CORRELATIVOS DE BARCODES O CODIGOS DE ARTICULO (QUE SI ESTAN EN UN ESTADO "editanto" se estan reservando SKUS y BARCODES) 
+
+LA LISTA CON ARTICULOS Y SKUS, CUANDO SE PRESIONE EL BOTON "CREAR Y ENVIAR PLANTILLA", ESTA LISTA PASARA A UN ESTADO "creado"
+
+
+
+ESTADO "creada":
+---------------
+
+
+IDEAS:
+------
+de Articulos y SKus como ayuda, sobre todo para los que cargaron a sap.. para que el excel  cargar sea lo mismo que el log que se guardara en mysql
+ 
+
+PENDIENTE YA:
+-------------
+
+--- cuando se edita detalle o agrega sku a un articulo desde la lista, deshabilitar los iconos de departamento para que solamente trabaje en el dpto seleccionado- si desea agregar otro articulo, debe volver a lista y agregar nuevo articulo
+--- CUANDO SE CARGA UN ARTICUL EXISTENTE EN SAP, EN LA API CONDICIONAMOS SI LA CATEGORIA_CODE tiene long mayor qe 5, le cortamos a 5.
+		DEBERIAMOS EN LUGAR DE PREGUNTAR LA LONGITUD, PREGUNTAR SI LA CADENA TIENE TEXTO, DE SER ASI, LLAMAR A UNA FUNCION QUE RECUPERE EL CODIGO DE LA CATEGORIA UDANDO EL NOMBRE DE LA CATEGORIA.
+		LO MISMO PARA LA PRENDA.
+
+
+--- cuando un reviser crea y revisa la misma lista, en listas.php no se verifica "revisado por", dado que en Bd, el estado de la lista = "REVISADA" pero en la relacion lista_has_usuario, no se guarda la operacion "REVISION"
+--- ver si ahora, o despues, pero seria ideal que el txt_sku_description no muestre el codigo de articulo y solo la descripcion y cuando los reviser envian el excel, alli fusionar ambos campos... esto conseguiria que este control no dependa de alguna modificacion manual del txt_sku_predijo y txt_sku_correlativo, tanto al crear como al editar un sku en lista, e incluso para el sap
+--- terminar la funcion para resetear todos los controles y aplicarlos cuando se cambia de tipo_ingreso
+
+
+--- EVENTOS PARA EDITAR DETALLE DE ARTICULO O AGREGAR COLOR/TALLA/COPA PARA UN ARTICULO
+--- EVENTOS PARA ELIMINAR SKU , ELIMINANDO DE BD EL ARTICULO O LISTA CUANDO UN ARTICULO SE QUEDE SIN SKUS Y UNA LISTA SE QUEDE SIN ARTICULOS RESPECTIVAMENTE
+--- CUANDO SE INTENTA AGREGAR OTRO ARTICULO, NO SE RESETEA EL CONTROL COMPOSICION, LO MISMO CUANDO SE CAMBIA DE DPTO Y ESTE CONTROL TIENE VALOR
+--- cuando se cambia de dpto ahora tb no se limpia el control color, revisar por favor
+--- SOLO SE CREO LAS EXCEPCIONES PARA EL UPDATE DE MARCA DONDE SE VALIDA QUE NO INGRESE LA MISMA COMBINACION POSICION/SIMBOLO, FALTA ESTO MISMO PARA EL CREATE_ITEM y para las columnas abreviaturas de PRESENTACION Y COLOR TANTO PARA EL UPDATE COMO PARA EL CREATE
+--- en el crud, limitar los nombres de los items segun el VARCHAR(LONGITUD_MAX) DE LAS TABLAS, PERO MAS IMPORTANTE, TCATAOGO Y PRESENTACION DEBEN DE TENER UNA LONGITUD MAXIMA DE 15 Y 10 CARACTERES RESPECTIVAMENTE, ESO VALIDARARLO EN EL CRUD AL MOMENTO DE REGISTRAR ESTOS ITEMS
+--- RELACIONES PENDIENTES, CUANDO ELIGEN BABYDOLL DEBERIA LLENARSE LOS SELECT COPA Y FCOPA, PERO NO MOSTRARSE HASTA QUE EN CATEGORIA ELIJAN CON COPA
+--- PARA AQUELLAS MARCAS TIPO CLIENTE, COMO WALMART, HAY QUE VER COMO CREAMOS LA EXCEPCION (podria ser que antes de crear la plantilla, preguntemos a los articulos, si las marcas son de tipo 'CLIENTE' y crea run array con aquellos articulos y despues usar este array comparando en cada fila del archivo excel y aplicar el veradero cliente)
+
+
+--- CRUD DE RELACIONES y PREFIJOS
+
+* ADMINISTRACION DE USUARIOS
+	- modulo para agregar, modificar y eliminar usuarios y perfiles de usuarios
+	
+	IMPORTANTÍSIMO.
+	* PARA EL CRUD DE PRESENTACION, OJO, LAS ABREVIATURAS, MIENTRAS NO SEAN VACIAS, NO PUEDEN REPETIRSE, VALIDAR ESTO EN EL NEGOCIO YA QUE MYSQLI NO PERMITE UNIQUE CUANDO HAY VARIOS VALORES VACIOS
+	* LO MISMO PARA LAS MARCAS, LA COMBINACION POSICION, SIMBOLO NO PUEDEN REPETIRSE
+	
